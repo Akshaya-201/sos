@@ -77,6 +77,14 @@ To install the SOS Emergency App locally, follow these steps:
 ```bash
   npm install
 ```
+4. Set up your environment variables:
+   - Copy the `.env.local.example` file to `.env.local`:
+     ```bash
+     cp .env.local.example .env.local
+     ```
+   - Open `.env.local` and fill in your Firebase configuration values
+   - You can get these values from your [Firebase Console](https://console.firebase.google.com/)
+
 
 ## Usage
 1. Launch the app on your mobile device.
