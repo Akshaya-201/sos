@@ -14,38 +14,17 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-## 2) Put models in default folder (recommended)
+## 2) Configure model paths
 
-Copy both files into:
-
-`services/violence-detector/models/`
-
-Expected filenames:
-
-- `modelnew.h5`
-- `vgg16_model.h5`
-
-No path edits are needed if you use this folder.
-
-## 3) Optional: override model paths with env vars
-
-PowerShell (Windows):
+PowerShell example:
 
 ```powershell
-$env:MODELNEW_PATH="D:\models\modelnew.h5"
-$env:VGG16_MODEL_PATH="D:\models\vgg16_model.h5"
+$env:MODELNEW_PATH="C:\Users\Mohan\Downloads\modelnew.h5"
+$env:VGG16_MODEL_PATH="C:\Users\Mohan\Downloads\vgg16_model.h5"
 $env:VIOLENCE_THRESHOLD="0.70"
 ```
 
-Bash (macOS/Linux):
-
-```bash
-export MODELNEW_PATH="/opt/models/modelnew.h5"
-export VGG16_MODEL_PATH="/opt/models/vgg16_model.h5"
-export VIOLENCE_THRESHOLD="0.70"
-```
-
-## 4) Run API
+## 3) Run API
 
 ```bash
 uvicorn app:app --host 127.0.0.1 --port 8001
@@ -62,4 +41,3 @@ VIOLENCE_DETECTOR_URL=http://127.0.0.1:8001/predict
 - The Next app captures camera frames, calls `/api/violence-detect`, and forwards to this service.
 - When violence is detected, Next assembles a rolling 15-second video + short audio clip and posts it to `/api/emergency-dispatch`.
 - To actually store/share media files, set `EVIDENCE_RELAY_URL` to your storage/notification backend.
-- If models are missing, service startup fails with a clear error showing where files are expected.

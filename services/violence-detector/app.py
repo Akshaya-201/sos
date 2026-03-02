@@ -1,6 +1,5 @@
 import io
 import os
-from pathlib import Path
 from typing import Tuple
 
 import numpy as np
@@ -11,28 +10,12 @@ from tensorflow.keras.models import load_model
 
 app = FastAPI(title="Violence Detector Service")
 
-BASE_DIR = Path(__file__).resolve().parent
-DEFAULT_MODELS_DIR = BASE_DIR / "models"
-MODELNEW_PATH = Path(os.getenv("MODELNEW_PATH", str(DEFAULT_MODELS_DIR / "modelnew.h5")))
-VGG16_MODEL_PATH = Path(os.getenv("VGG16_MODEL_PATH", str(DEFAULT_MODELS_DIR / "vgg16_model.h5")))
+MODELNEW_PATH = os.getenv("MODELNEW_PATH", r"C:\Users\Mohan\Downloads\modelnew.h5")
+VGG16_MODEL_PATH = os.getenv("VGG16_MODEL_PATH", r"C:\Users\Mohan\Downloads\vgg16_model.h5")
 THRESHOLD = float(os.getenv("VIOLENCE_THRESHOLD", "0.70"))
 INPUT_SIZE = int(os.getenv("MODEL_INPUT_SIZE", "224"))
-
-
-def _ensure_model_exists(path: Path, env_name: str) -> None:
-    if path.exists():
-        return
-    raise RuntimeError(
-        f"Missing model file: {path}. "
-        f"Set {env_name} or place the model in {DEFAULT_MODELS_DIR}."
-    )
-
-
-_ensure_model_exists(MODELNEW_PATH, "MODELNEW_PATH")
-_ensure_model_exists(VGG16_MODEL_PATH, "VGG16_MODEL_PATH")
-
-model_new = load_model(str(MODELNEW_PATH))
-model_vgg = load_model(str(VGG16_MODEL_PATH))
+model_new = load_model(MODELNEW_PATH)
+model_vgg = load_model(VGG16_MODEL_PATH)
 
 
 class PredictRequest(BaseModel):
@@ -77,8 +60,8 @@ def predict_probabilities(batch: np.ndarray) -> Tuple[float, float, float]:
 def health():
     return {
         "status": "ok",
-        "modelnew_path": str(MODELNEW_PATH),
-        "vgg16_model_path": str(VGG16_MODEL_PATH),
+        "modelnew_path": MODELNEW_PATH,
+        "vgg16_model_path": VGG16_MODEL_PATH,
         "threshold": THRESHOLD,
     }
 
