@@ -34,7 +34,7 @@ export async function sendSMS(to, body) {
 
         if (!response.ok) {
             const errorMessage = isJson
-                ? payload.error || 'Request failed'
+                ? `${payload.error || 'Request failed'}${payload.details ? `: ${payload.details}` : ''}`
                 : 'Request failed with non-JSON response';
             throw new Error(`Failed to send SMS: ${errorMessage}`);
         }

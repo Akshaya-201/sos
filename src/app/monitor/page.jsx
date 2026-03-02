@@ -229,7 +229,10 @@ export default function MonitorPage() {
               Restart Monitoring
             </button>
             <button
-              onClick={stopEverything}
+              onClick={() => {
+                stopEverything();
+                router.push("/");
+              }}
               className="rounded-xl bg-[#C1121F] px-4 py-3 text-sm font-semibold text-white"
             >
               Stop Camera

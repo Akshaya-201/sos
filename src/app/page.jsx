@@ -22,17 +22,17 @@ function MainComponent() {
   ]);
 
   // Define the receiver's phone number and email
-  const RECEIVER_PHONE_NUMBER = '6588270718'; // Replace with the actual phone number
+  const RECEIVER_PHONE_NUMBER = '+6588270718'; // Replace with the actual phone number
   const RECEIVER_EMAIL = 'thabhelo.duve@talladega.edu'; // Replace with the actual email address
 
-  const handleSOS = () => {
+  const handleSOS = (source = "sos") => {
     getLocation((location) => {
-      const message = `SOS! I need urgent help. My location is: https://www.google.com/maps/@${location.latitude},${location.longitude}`;
+      const message = `SOS triggered (${source}). I need urgent help. My location is: https://www.google.com/maps/@${location.latitude},${location.longitude}`;
       sendSMS(RECEIVER_PHONE_NUMBER, message); 
     });
 
     setEmergency(true);
-    router.push("/monitor?source=sos");
+    router.push(`/monitor?source=${encodeURIComponent(source)}`);
   };
 
   // Attach the event listener for the SOS button in useEffect
@@ -245,6 +245,7 @@ function MainComponent() {
                             ].map((item, index) => (
                               <button
                                 key={index}
+                                onClick={() => handleSOS(`category:${item.type.toLowerCase()}`)}
                                 className={`group relative overflow-hidden rounded-2xl border border-transparent ${item.cardBg} px-3 py-3 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md`}
                               >
                                 <div className="flex items-center gap-3">
