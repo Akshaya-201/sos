@@ -28,12 +28,18 @@ export async function sendSMS(to, body) {
             body: JSON.stringify({ to, body }),
         });
 
+        const contentType = response.headers.get('content-type') || '';
+        const isJson = contentType.includes('application/json');
+        const payload = isJson ? await response.json() : await response.text();
+
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(`Failed to send SMS: ${errorData.error}`);
+            const errorMessage = isJson
+                ? payload.error || 'Request failed'
+                : 'Request failed with non-JSON response';
+            throw new Error(`Failed to send SMS: ${errorMessage}`);
         }
 
-        const data = await response.json();
+        const data = payload;
         console.log("Message sent:", data.sid); // Log the SID returned from the server
         return data.sid; // Return the message SID for further processing if needed
     } catch (error) {

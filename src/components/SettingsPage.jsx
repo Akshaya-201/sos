@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 const SettingsPage = () => (
-    <div className="flex-1 overflow-y-auto bg-gray-100">
-      <h2 className="text-2xl font-bold p-4 bg-white text-center">SETTINGS</h2>
+    <div className="flex-1 overflow-y-auto bg-[#FFF8EB]">
+      <h2 className="text-2xl font-bold p-4 bg-white text-center text-[#0B1F3A] border-b border-[#0B1F3A]/10">SETTINGS</h2>
       <div className="p-4">
         <SettingsSection title="Notifications">
           <ToggleSetting label="Push Notifications" />
@@ -12,7 +12,7 @@ const SettingsPage = () => (
         <SettingsSection title="Emergency Triggers">
           <div className="flex items-center justify-between">
             <span>Double-Tap Action</span>
-            <i className="fas fa-phone text-blue-500"></i>
+            <i className="fas fa-phone text-[#C1121F]"></i>
           </div>
           <ToggleSetting label="Audio Recording" />
         </SettingsSection>
@@ -24,24 +24,21 @@ const SettingsPage = () => (
         </SettingsSection>
         <SettingsSection title="Account Settings">
           <button className="w-full text-left py-2">Change Password</button>
-          <button
-            className="w-full text-left py-2"
-            onClick={() => setCurrentPage("myCircle")}
-          >
+          <button className="w-full text-left py-2">
             Manage Trusted Contacts
           </button>
         </SettingsSection>
         <SettingsSection title="App Settings">
           <div className="flex items-center justify-between">
             <span>Theme</span>
-            <select className="bg-white border rounded p-1">
+            <select className="bg-white border border-[#0B1F3A]/20 rounded p-1">
               <option>Light</option>
               <option>Dark</option>
             </select>
           </div>
           <div className="flex items-center justify-between mt-2">
             <span>Language</span>
-            <select className="bg-white border rounded p-1">
+            <select className="bg-white border border-[#0B1F3A]/20 rounded p-1">
               <option>English</option>
               <option>Spanish</option>
               <option>French</option>
@@ -60,8 +57,8 @@ const SettingsPage = () => (
 
   const SettingsSection = ({ title, children }) => (
     <div className="mb-6">
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      <div className="bg-white rounded-lg p-4 shadow">{children}</div>
+      <h3 className="text-lg font-semibold mb-2 text-[#0B1F3A]">{title}</h3>
+      <div className="bg-white rounded-lg p-4 shadow border border-[#0B1F3A]/10 text-[#0B1F3A]">{children}</div>
     </div>
   );
   
@@ -77,7 +74,7 @@ const SettingsPage = () => (
         />
         <label
           htmlFor={label}
-          className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+          className="toggle-label block overflow-hidden h-6 rounded-full bg-[#0B1F3A]/25 cursor-pointer"
         ></label>
       </div>
     </div>

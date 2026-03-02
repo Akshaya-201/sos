@@ -19,20 +19,20 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="flex-1 overflow-y-auto bg-gray-100">
-      <h2 className="text-2xl font-bold p-4 bg-white text-center">PROFILE</h2>
+    <div className="flex-1 overflow-y-auto bg-[#FFF8EB] text-[#0B1F3A]">
+      <h2 className="text-2xl font-bold p-4 bg-white text-center border-b border-[#0B1F3A]/10">PROFILE</h2>
       <div className="p-4">
         <ProfileSection title="User Information">
           <div className="flex items-center mb-4">
-            <div className="w-24 h-24 bg-gray-300 rounded-full mr-4 flex items-center justify-center">
-              <i className="fas fa-user text-4xl text-gray-500"></i>
+            <div className="w-24 h-24 bg-[#EAF0F8] rounded-full mr-4 flex items-center justify-center">
+              <i className="fas fa-user text-4xl text-[#0B1F3A]/60"></i>
             </div>
             <div>
               <h3 className="text-xl font-semibold">Thabhelo Duve</h3>
-              <p className="text-gray-600">+1 234-567-8910</p>
+              <p className="text-[#0B1F3A]/70">+65 8777 8899</p>
             </div>
           </div>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-full w-full mb-4">
+          <button className="bg-[#FF7A00] text-white px-4 py-2 rounded-full w-full mb-4">
             Change Profile Picture
           </button>
         </ProfileSection>
@@ -60,13 +60,13 @@ const ProfilePage = () => {
 
         {/* Logout Button */}
         <button
-          className="bg-red-500 text-white px-4 py-2 rounded-full w-full mt-4"
+          className="bg-[#C1121F] text-white px-4 py-2 rounded-full w-full mt-4"
           onClick={handleLogout} // Attach the logout handler
         >
           Logout
         </button>
 
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-full w-full mt-4">
+        <button className="bg-[#0B1F3A] text-white px-4 py-2 rounded-full w-full mt-4">
           Connect Apple Watch
         </button>
       </div>
@@ -77,18 +77,18 @@ const ProfilePage = () => {
 // Same as before
 const ProfileSection = ({ title, children }) => (
   <div className="mb-6">
-    <h3 className="text-lg font-semibold mb-2">{title}</h3>
-    <div className="bg-white rounded-lg p-4 shadow">{children}</div>
+    <h3 className="text-lg font-semibold mb-2 text-[#0B1F3A]">{title}</h3>
+    <div className="bg-white rounded-lg p-4 shadow border border-[#0B1F3A]/10">{children}</div>
   </div>
 );
 
 const InputField = ({ label, placeholder }) => (
   <div className="mb-4">
-    <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+    <label className="block text-sm font-medium text-[#0B1F3A]/80 mb-1">{label}</label>
     <input
       type="text"
       placeholder={placeholder}
-      className="w-full p-2 border rounded-md"
+      className="w-full p-2 border border-[#0B1F3A]/20 rounded-md bg-white"
     />
   </div>
 );
@@ -105,7 +105,7 @@ const ToggleSetting = ({ label }) => (
       />
       <label
         htmlFor={label}
-        className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+        className="toggle-label block overflow-hidden h-6 rounded-full bg-[#0B1F3A]/25 cursor-pointer"
       ></label>
     </div>
   </div>

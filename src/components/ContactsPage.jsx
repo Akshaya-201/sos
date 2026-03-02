@@ -1,120 +1,115 @@
 import React, { useState } from 'react';
 
 const favoriteContacts = [
-    {
-      name: "911",
-      icon: "fa-phone-alt",
-      bg: "bg-red-100",
-      textColor: "text-red-500",
-    },
-    {
-      name: "Mom",
-      icon: "fa-heart",
-      bg: "bg-blue-100",
-      textColor: "text-blue-500",
-    },
-    {
-      name: "Dad",
-      icon: "fa-home",
-      bg: "bg-green-100",
-      textColor: "text-green-500",
-    },
-    {
-      name: "Sis",
-      icon: "fa-female",
-      bg: "bg-yellow-100",
-      textColor: "text-yellow-500",
-    },
-    {
-      name: "Bro",
-      icon: "fa-male",
-      bg: "bg-blue-100",
-      textColor: "text-blue-500",
-    },
+  { name: "Tan Wei Ming", number: "+65 8123 4567", icon: "fa-heart", bg: "bg-[#FFE6E8]", textColor: "text-[#C1121F]" },
+  { name: "Nur Aisyah", number: "+65 9234 5678", icon: "fa-home", bg: "bg-[#FFECD8]", textColor: "text-[#FF7A00]" },
+  { name: "Arjun Kumar", number: "+65 9345 6789", icon: "fa-phone-alt", bg: "bg-[#EAF0F8]", textColor: "text-[#0B1F3A]" },
+  { name: "Lim Jia Yi", number: "+65 8456 7890", icon: "fa-female", bg: "bg-[#FFECD8]", textColor: "text-[#FF7A00]" },
+  { name: "Siti Nurul", number: "+65 9567 8901", icon: "fa-male", bg: "bg-[#EAF0F8]", textColor: "text-[#0B1F3A]" },
 ];
 
 const allContacts = [
-    { name: "Alice Smith", number: "+1 234-567-8901", icon: "fa-star" },
-    { name: "Bob Johnson", number: "+1 234-567-8902", icon: "fa-heart" },
-    { name: "Charlie Brown", number: "+1 234-567-8903", icon: "fa-user" },
-    { name: "David Lee", number: "+1 234-567-8904", icon: "fa-user-friends" },
-    { name: "Eva Garcia", number: "+1 234-567-8905", icon: "fa-star" },
-    { name: "Frank Wilson", number: "+1 234-567-8906", icon: "fa-user" },
-    { name: "Grace Taylor", number: "+1 234-567-8907", icon: "fa-heart" },
-    {
-      name: "Henry Martinez",
-      number: "+1 234-567-8908",
-      icon: "fa-user-friends",
-    },
-    { name: "Ivy Chen", number: "+1 234-567-8909", icon: "fa-star" },
-    { name: "Jack White", number: "+1 234-567-8910", icon: "fa-user" },
+  { name: "Ahmad Firdaus", number: "+65 8777 8899" },
+  { name: "Arjun Kumar", number: "+65 8999 0011" },
+  { name: "Chen Wei Jie", number: "+65 8111 2233" },
+  { name: "Karthik Rajan", number: "+65 9222 3344" },
+  { name: "Lim Jia Yi", number: "+65 8222 3344" },
+  { name: "Meera Devi", number: "+65 9333 4455" },
+  { name: "Muhammad Iqbal", number: "+65 8888 9900" },
+  { name: "Ng Hui Min", number: "+65 8444 5566" },
+  { name: "Nur Aisyah Rahman", number: "+65 8555 6677" },
+  { name: "Priya Nair", number: "+65 9111 2233" },
+  { name: "Siti Nurul Huda", number: "+65 8666 7788" },
+  { name: "Tan Wei Ming", number: "+65 8333 4455" },
 ];
 
 const ContactsPage = () => {
-  // Define state for search query
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Filter contacts based on the search query
-  const filteredContacts = allContacts.filter((contact) =>
+  const filteredContacts = allContacts
+    .filter((contact) =>
     contact.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const groupedContacts = filteredContacts.reduce((groups, contact) => {
+    const letter = contact.name.charAt(0).toUpperCase();
+    if (!groups[letter]) {
+      groups[letter] = [];
+    }
+    groups[letter].push(contact);
+    return groups;
+  }, {});
 
   return (
-    <div className="flex-1 overflow-y-auto">
-      <div className="p-4 bg-gray-100">
-        <h2 className="text-2xl font-bold mb-4">My Circle</h2>
-        <div className="flex flex-wrap justify-between mb-4 space-x-2">
+    <div className="flex-1 overflow-y-auto bg-[#FFF8EB]">
+      <div className="sticky top-0 z-10 bg-[#FFF8EB] px-4 pt-5 pb-4 border-b border-[#0B1F3A]/10">
+        <h2 className="text-3xl font-bold tracking-tight text-[#0B1F3A]">Contacts</h2>
+        <div className="relative mt-4">
+          <i className="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-[#0B1F3A]/40"></i>
+          <input
+            type="text"
+            placeholder="Search"
+            className="w-full rounded-xl border border-[#0B1F3A]/15 bg-white py-3 pl-11 pr-4 text-base text-[#0B1F3A] outline-none focus:ring-2 focus:ring-[#FF7A00]/40"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className="px-4 py-4">
+        <h3 className="text-xs font-semibold uppercase tracking-wide text-[#0B1F3A]/60 mb-3">Favorites</h3>
+        <div className="flex gap-3 overflow-x-auto pb-1">
           {favoriteContacts.map((contact, index) => (
             <div
               key={index}
-              className={`w-16 h-16 ${contact.bg} ${contact.textColor} rounded-full flex flex-col items-center justify-center`}
+              className="min-w-[72px] flex flex-col items-center"
             >
-              <i className={`fas ${contact.icon} text-xl mb-1`}></i>
-              <span className="text-xs font-semibold">{contact.name}</span>
+              <div className={`w-14 h-14 rounded-full ${contact.bg} ${contact.textColor} flex items-center justify-center`}>
+                <i className={`fas ${contact.icon} text-xl`}></i>
+              </div>
+              <span className="mt-2 text-xs font-semibold text-[#0B1F3A]">{contact.name}</span>
             </div>
           ))}
-          <div className="w-16 h-16 bg-gray-200 rounded-full flex flex-col items-center justify-center">
-            <i className="fas fa-plus text-xl mb-1 text-gray-600"></i>
-            <span className="text-xs font-semibold text-gray-600">Add</span>
-          </div>
-        </div>
-        <div className="relative mb-4">
-          <input
-            type="text"
-            placeholder="Search contacts"
-            className="w-full p-2 pl-8 rounded-full border border-gray-300"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)} // Update search query on input change
-          />
-          <i className="fas fa-search absolute left-3 top-3 text-gray-400"></i>
         </div>
       </div>
-      <div className="flex-grow overflow-y-auto">
-        {filteredContacts.map((contact, index) => (
-          <div
-            key={index}
-            className="flex items-center justify-between p-4 border-b border-gray-200"
-          >
-            <div className="flex items-center">
-              <i
-                className={`fas ${contact.icon} text-xl text-gray-500 mr-3`}
-              ></i>
-              <div>
-                <h3 className="font-semibold">{contact.name}</h3>
-                <p className="text-sm text-gray-600">{contact.number}</p>
+
+      <div className="bg-white border-t border-[#0B1F3A]/10">
+        {Object.keys(groupedContacts).length === 0 && (
+          <p className="px-4 py-8 text-center text-sm text-[#0B1F3A]/60">No contacts found</p>
+        )}
+
+        {Object.entries(groupedContacts).map(([letter, contacts]) => (
+          <div key={letter}>
+            <div className="px-4 py-2 text-xs font-semibold text-[#0B1F3A]/60 bg-[#FFF8EB] border-y border-[#0B1F3A]/10">
+              {letter}
+            </div>
+
+            {contacts.map((contact) => (
+              <div
+                key={contact.name}
+                className="flex items-center justify-between px-4 py-3 border-b border-[#0B1F3A]/10"
+              >
+                <div className="flex items-center min-w-0">
+                  <div className="w-11 h-11 rounded-full bg-[#EAF0F8] text-[#0B1F3A] flex items-center justify-center font-semibold">
+                    {contact.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                  </div>
+                  <div className="ml-3 min-w-0">
+                    <h4 className="font-medium text-[#0B1F3A] truncate">{contact.name}</h4>
+                    <p className="text-sm text-[#0B1F3A]/60 truncate">{contact.number}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 pl-2">
+                  <button className="w-9 h-9 rounded-full bg-[#C1121F] text-white">
+                    <i className="fas fa-phone text-sm"></i>
+                  </button>
+                  <button className="w-9 h-9 rounded-full bg-[#FF7A00] text-white">
+                    <i className="fas fa-comment text-sm"></i>
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className="flex space-x-2">
-              <button className="p-2 bg-green-500 text-white rounded-full">
-                <i className="fas fa-phone"></i>
-              </button>
-              <button className="p-2 bg-blue-500 text-white rounded-full">
-                <i className="fas fa-comment"></i>
-              </button>
-              <button className="p-2 bg-yellow-500 text-white rounded-full">
-                <i className="fas fa-star"></i>
-              </button>
-            </div>
+            ))}
           </div>
         ))}
       </div>
