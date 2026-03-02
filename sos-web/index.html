@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SOS — Emergency Helper</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <h1 class="app-title">Emergency?</h1>
+        <p class="app-subtitle">Choose a category and press &amp; hold to send.</p>
+      </header>
+
+      <main class="app-main">
+        <!-- HOME / SOS SCREEN -->
+        <section id="screen-home" class="screen screen--active">
+          <section class="sos-section">
+            <button id="sos-button" class="sos-button" type="button">
+              <span class="sos-label">SOS</span>
+              <span class="sos-hint">Press and hold 3 sec</span>
+              <span class="sos-progress"></span>
+            </button>
+          </section>
+
+          <section class="categories-section">
+            <h2 class="section-title">What do you need help with?</h2>
+            <div id="category-list" class="category-list">
+              <button class="category-chip" data-category="medical">Medical</button>
+              <button class="category-chip" data-category="fire">Fire</button>
+              <button class="category-chip" data-category="police">Police</button>
+              <button class="category-chip" data-category="accident">Accident</button>
+              <button class="category-chip" data-category="mental-health">Mental Health</button>
+              <button class="category-chip" data-category="other">Other</button>
+            </div>
+          </section>
+
+          <section class="info-section">
+            <p class="info-text">
+              Your selected category and (in a real app) your location would be shared with your emergency contacts.
+            </p>
+          </section>
+        </section>
+
+        <!-- CONTACTS SCREEN -->
+        <section id="screen-contacts" class="screen">
+          <div class="screen-header">
+            <h2 class="section-title">Contacts</h2>
+            <p class="section-subtitle">Singapore emergency contacts and family.</p>
+          </div>
+
+          <div class="contacts-search">
+            <input
+              id="contact-search"
+              type="search"
+              placeholder="Search name or number"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="contacts-favorites">
+            <h3 class="section-label">Favourites</h3>
+            <div class="favorites-row">
+              <button class="favorite-pill" data-contact-id="father">Dad</button>
+              <button class="favorite-pill" data-contact-id="mother">Mom</button>
+              <button class="favorite-pill" data-contact-id="doctor">Family Doctor</button>
+            </div>
+          </div>
+
+          <div class="contacts-all">
+            <h3 class="section-label">All Contacts</h3>
+
+            <div id="contact-detail" class="contact-detail">
+              <p class="contact-detail-placeholder">Select a contact to see details.</p>
+            </div>
+
+            <ul id="contact-list" class="contact-list">
+              <li
+                class="contact-row"
+                data-contact-id="father"
+                data-name="Father"
+                data-phone="+65 9123 4567"
+              >
+                <div class="contact-avatar">F</div>
+                <div class="contact-main">
+                  <div class="contact-name">Father</div>
+                  <div class="contact-phone">+65 9123 4567</div>
+                </div>
+              </li>
+              <li
+                class="contact-row"
+                data-contact-id="mother"
+                data-name="Mother"
+                data-phone="+65 9876 5432"
+              >
+                <div class="contact-avatar">M</div>
+                <div class="contact-main">
+                  <div class="contact-name">Mother</div>
+                  <div class="contact-phone">+65 9876 5432</div>
+                </div>
+              </li>
+              <li
+                class="contact-row"
+                data-contact-id="brother"
+                data-name="Brother"
+                data-phone="+65 9012 3456"
+              >
+                <div class="contact-avatar">B</div>
+                <div class="contact-main">
+                  <div class="contact-name">Brother</div>
+                  <div class="contact-phone">+65 9012 3456</div>
+                </div>
+              </li>
+              <li
+                class="contact-row"
+                data-contact-id="doctor"
+                data-name="Dr. Tan (GP)"
+                data-phone="+65 6234 5678"
+              >
+                <div class="contact-avatar">D</div>
+                <div class="contact-main">
+                  <div class="contact-name">Dr. Tan (GP)</div>
+                  <div class="contact-phone">+65 6234 5678</div>
+                </div>
+              </li>
+              <li
+                class="contact-row"
+                data-contact-id="ambulance"
+                data-name="Ambulance (995)"
+                data-phone="995"
+              >
+                <div class="contact-avatar">A</div>
+                <div class="contact-main">
+                  <div class="contact-name">Ambulance (995)</div>
+                  <div class="contact-phone">995</div>
+                </div>
+              </li>
+              <li
+                class="contact-row"
+                data-contact-id="police"
+                data-name="Police (999)"
+                data-phone="999"
+              >
+                <div class="contact-avatar">P</div>
+                <div class="contact-main">
+                  <div class="contact-name">Police (999)</div>
+                  <div class="contact-phone">999</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- PROFILE SCREEN -->
+        <section id="screen-profile" class="screen">
+          <div class="profile-header">
+            <div class="profile-avatar">SZ</div>
+            <div class="profile-main">
+              <h2 class="profile-name">S.O.S User</h2>
+              <p class="profile-meta">+65 9000 0000 · user@sos.app</p>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <h3 class="section-label">Personal</h3>
+            <div class="profile-row">
+              <span class="profile-label">Name</span>
+              <span class="profile-value">S.O.S User</span>
+            </div>
+            <div class="profile-row">
+              <span class="profile-label">Phone</span>
+              <span class="profile-value">+65 9000 0000</span>
+            </div>
+            <div class="profile-row">
+              <span class="profile-label">Emergency Language</span>
+              <span class="profile-value">English</span>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <h3 class="section-label">Emergency details</h3>
+            <div class="profile-row">
+              <span class="profile-label">Blood type</span>
+              <span class="profile-value">O+</span>
+            </div>
+            <div class="profile-row">
+              <span class="profile-label">Allergies</span>
+              <span class="profile-value">None recorded</span>
+            </div>
+            <div class="profile-row">
+              <span class="profile-label">Primary hospital</span>
+              <span class="profile-value">Singapore General Hospital</span>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <h3 class="section-label">App settings</h3>
+            <button class="toggle-row" type="button" data-toggle="location">
+              <div>
+                <div class="toggle-label">Share live location</div>
+                <div class="toggle-description">Included when you trigger SOS.</div>
+              </div>
+              <div class="toggle-switch" aria-hidden="true"></div>
+            </button>
+
+            <button class="toggle-row" type="button" data-toggle="sound">
+              <div>
+                <div class="toggle-label">Play alarm sound</div>
+                <div class="toggle-description">Helps people around you notice.</div>
+              </div>
+              <div class="toggle-switch" aria-hidden="true"></div>
+            </button>
+
+            <div class="profile-row">
+              <span class="profile-label">Default category</span>
+              <span class="profile-value">Medical</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- LIVE MONITOR SCREEN -->
+        <section id="screen-monitor" class="screen monitor-screen">
+          <header class="monitor-header">
+            <button id="monitor-back" type="button" class="monitor-back">
+              Back
+            </button>
+            <div class="monitor-title">SOS Live Monitor</div>
+            <div id="monitor-state" class="monitor-state">IDLE</div>
+          </header>
+
+          <section class="monitor-video-card">
+            <video
+              id="monitor-video"
+              class="monitor-video"
+              autoplay
+              playsinline
+              muted
+            ></video>
+          </section>
+
+          <section class="monitor-status-card">
+            <p id="monitor-message" class="monitor-message">
+              Waiting for camera permission...
+            </p>
+            <div class="monitor-metrics">
+              <div>Video probability: <span id="prob-video">0%</span></div>
+              <div>Audio probability: <span id="prob-audio">0%</span></div>
+              <div>Combined probability: <span id="prob-combined">0%</span></div>
+            </div>
+            <p id="monitor-footer" class="monitor-footer">
+              Source: sos · No incident detected yet.
+            </p>
+          </section>
+
+          <div class="monitor-buttons">
+            <button
+              id="monitor-restart"
+              type="button"
+              class="monitor-btn monitor-btn--primary"
+            >
+              Restart Monitoring
+            </button>
+            <button
+              id="monitor-stop"
+              type="button"
+              class="monitor-btn monitor-btn--danger"
+            >
+              Stop Camera
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav">
+        <button class="nav-item nav-item--active" type="button" data-screen="home">
+          <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-item" type="button" data-screen="contacts">
+          <span class="nav-label">Contacts</span>
+        </button>
+        <button class="nav-item" type="button" data-screen="profile">
+          <span class="nav-label">Profile</span>
+        </button>
+      </nav>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
+

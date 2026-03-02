@@ -4,14 +4,27 @@ from typing import Tuple
 
 import numpy as np
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from PIL import Image
 from tensorflow.keras.models import load_model
 
 app = FastAPI(title="Violence Detector Service")
 
-MODELNEW_PATH = os.getenv("MODELNEW_PATH", r"C:\Users\Mohan\Downloads\modelnew.h5")
-VGG16_MODEL_PATH = os.getenv("VGG16_MODEL_PATH", r"C:\Users\Mohan\Downloads\vgg16_model.h5")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+MODELNEW_PATH = os.getenv(
+    "MODELNEW_PATH", r"C:\Users\Srujan\Downloads\Telegram Desktop\modelnew.h5"
+)
+VGG16_MODEL_PATH = os.getenv(
+    "VGG16_MODEL_PATH", r"C:\Users\Srujan\Downloads\Telegram Desktop\vgg16_model.h5"
+)
 THRESHOLD = float(os.getenv("VIOLENCE_THRESHOLD", "0.70"))
 INPUT_SIZE = int(os.getenv("MODEL_INPUT_SIZE", "224"))
 model_new = load_model(MODELNEW_PATH)
